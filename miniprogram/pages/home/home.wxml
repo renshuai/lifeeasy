@@ -1,0 +1,11 @@
+<view class="home-container">
+  <view class='nav-container'>
+    <view class='nav-item' wx:for="{{navs}}">
+      <icon class='{{item.icon}}'></icon>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+  <view class='latest-container'>
+    <text>最新信息</text>
+  </view>
+</view>

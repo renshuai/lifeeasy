@@ -1,0 +1,79 @@
+.home-container {
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+  background-color: #f6f6f6;
+}
+.nav-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0 0 30rpx 0;
+}
+
+.nav-item {
+  display: flex;
+  width: 20%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30rpx 0 0;
+}
+
+.nav-item icon {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.nav-item text {
+  font-size: 12px;
+}
+
+.icon-carwei {
+  color: #FD0000;
+}
+
+.icon-zhaopin {
+  color: #6699FF;
+}
+
+.icon-fangzidichan {
+  color: #009933;
+}
+
+.icon-zizhutuiguang {
+ color: #FF6633;
+}
+
+.icon-car1 {
+  color: #6666FF;
+}
+
+.icon-ershoushebei {
+  color: #9966FF;
+}
+
+.icon-fuwu {
+  color: #CC3300;
+}
+
+.icon-fuwu1 {
+  color: #3366CC;
+}
+
+.icon-youhui {
+  color: #339966;
+}
+
+.icon-tutechan {
+  color: #CC6600;
+}
+
+.latest-container {
+  margin-top: 20rpx;
+  background-color: #ffffff;
+  padding: 20rpx;
+  font-size: 14px;
+}
