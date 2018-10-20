@@ -1,0 +1,87 @@
+.page-container {
+  background-color: #f6f6f6;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.tab-list {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-list text {
+  flex: 1;
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  /* padding: 30rpx 0 */
+}
+
+.tab-list text.active {
+  color: #FD0000;
+}
+.content {
+  height: calc(100% - 57px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.list-item {
+  background-color: #fff;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 72px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
+}
+.info-type {
+  height: 100%;
+  line-height: 52px;
+}
+.info-detail {
+  flex: 1;
+  margin-left: 20rpx;
+}
+
+.info-basic {
+  display: flex;
+  align-items: center;
+}
+
+.info-basic .job-name {
+  margin-right: 30rpx;
+}
+
+.job-place {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.placeholder {
+  height: 100px;
+}
+
+.add-btn {
+  position: fixed;
+  background-color: #FD0000;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  line-height: 60px;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -30px;
+  /* right: 20px; */
+}
+
+.icon-arrow-right {
+  color: #3399FF;
+}

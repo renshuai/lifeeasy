@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 881033 */
-  src: url('//at.alicdn.com/t/font_881033_5w0z127ezi3.eot');
-  src: url('//at.alicdn.com/t/font_881033_5w0z127ezi3.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_881033_5w0z127ezi3.woff') format('woff'),
-  url('//at.alicdn.com/t/font_881033_5w0z127ezi3.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_881033_5w0z127ezi3.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_881033_u60rnnjjyse.eot');
+  src: url('//at.alicdn.com/t/font_881033_u60rnnjjyse.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_881033_u60rnnjjyse.woff') format('woff'),
+  url('//at.alicdn.com/t/font_881033_u60rnnjjyse.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_881033_u60rnnjjyse.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -71,5 +71,7 @@
 .icon-fangzidichan:before { content: "\e627"; }
 
 .icon-carwei:before { content: "\e625"; }
+
+.icon-arrow-right:before { content: "\e604"; }
 
 

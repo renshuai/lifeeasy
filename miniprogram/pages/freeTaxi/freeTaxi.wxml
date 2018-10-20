@@ -1,0 +1,24 @@
+<view class='page-container'>
+  <view class='tab-list'>
+    <text data-index='0' class="{{(activeIndex == '0') ? 'active' : ''}}" bindtap='tabClick'>全部</text>
+    <text data-index='1' class="{{(activeIndex == '1') ? 'active' : ''}}" bindtap='tabClick'>人找车</text>
+    <text data-index='2' class="{{(activeIndex == '2') ? 'active' : ''}}" bindtap='tabClick'>车找人</text>
+  </view>
+  <view class='content'>
+    <view wx:for="{{list}}" wx:if="{{list.length}}" class='list-item' bindtap='showDetail' data-id='{{item._id}}'>
+      <view class='info-type' wx:if="{{item.type === '0'}}">人找车</view>
+      <view class='info-type' wx:if="{{item.type === '1'}}">车找人</view>
+      <view class='info-detail'>
+        <view class='info-place'>
+          <text>{{item.from}}</text>
+          <view class='line'></view>
+          <text>{{item.to}}</text>
+        </view>
+        <text>出发时间: {{item.time}}</text>
+      </view>
+      <icon class='iconfont icon-arrow-right' bindtap='showDetail' data-id='{{item._id}}'></icon>
+    </view>
+    <view class='placeholder'></view>
+  </view>
+  <view class='add-btn' bindtap='publish'>发布</view>
+</view>

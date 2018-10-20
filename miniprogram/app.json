@@ -9,7 +9,11 @@
     "pages/databaseGuide/databaseGuide",
     "pages/addFunction/addFunction",
     "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib"
+    "pages/chooseLib/chooseLib",
+    "pages/freeTaxi/freeTaxi",
+    "pages/freeTaxi/detail/detail",
+    "pages/publish/freeTaxi/freeTaxi",
+    "pages/job/job"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

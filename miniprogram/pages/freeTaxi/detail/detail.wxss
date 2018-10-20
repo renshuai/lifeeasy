@@ -1,0 +1,57 @@
+.page-container {
+  background-color: #fff;
+  padding: 20px;
+}
+.form-block {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.form-block > text {
+  margin-right: 10px;
+  width: 5em;
+}
+
+.form-block radio-group,
+.form-block input,
+.form-block picker {
+  flex: 1;
+}
+
+.radio-group label {
+  margin-right: 10rpx;
+}
+
+.operate-wrap {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.operate-wrap button {
+  flex: 1;
+}
+
+.edit-btn,
+.delete-btn,
+.contact-btn {
+  margin-right: 10rpx;
+}
+
+.edit-btn,
+.contact-btn {
+  background-color: #FD0000;
+  color: #fff;
+}
+
+.delete-btn {
+  background-color: #999999;
+  color: #fff;
+}
+
+.back-btn {
+  border: 1px solid #FD0000;
+  color: #FD0000;
+}

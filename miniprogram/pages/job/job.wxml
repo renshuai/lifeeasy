@@ -1,0 +1,23 @@
+<view class="page-container">
+  <view class='tab-list'>
+    <text data-index='0' class="{{(activeIndex == '0') ? 'active' : ''}}" bindtap='tabClick'>全部</text>
+    <text data-index='1' class="{{(activeIndex == '1') ? 'active' : ''}}" bindtap='tabClick'>招聘信息</text>
+    <text data-index='2' class="{{(activeIndex == '2') ? 'active' : ''}}" bindtap='tabClick'>求职信息</text>
+  </view>
+  <view class='content'>
+    <view wx:for="{{list}}" wx:if="{{list.length}}" class='list-item' bindtap='showDetail' data-id='{{item._id}}'>
+      <view class='info-type' wx:if="{{item.type === '0'}}">招聘</view>
+      <view class='info-type' wx:if="{{item.type === '1'}}">求职</view>
+      <view class='info-detail'>
+        <view class='info-basic'>
+          <text class='job-name'>{{item.job}}</text>
+          <text>{{item.salary}}</text>
+        </view>
+        <text class='job-place'>工作地点: {{item.place}}</text>
+      </view>
+      <icon class='iconfont icon-arrow-right' bindtap='showDetail' data-id='{{item._id}}'></icon>
+    </view>
+    <view class='placeholder'></view>
+  </view>
+  <view class='add-btn' bindtap='publish'>发布</view>
+</view>

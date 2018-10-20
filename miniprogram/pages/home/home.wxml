@@ -1,6 +1,6 @@
 <view class="home-container">
   <view class='nav-container'>
-    <view class='nav-item' wx:for="{{navs}}">
+    <view class='nav-item' wx:for="{{navs}}" bindtap='redirectTo' data-type='{{item.type}}'>
       <icon class='{{item.icon}}'></icon>
       <text>{{item.name}}</text>
     </view>

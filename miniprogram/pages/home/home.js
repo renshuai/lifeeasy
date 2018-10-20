@@ -6,11 +6,13 @@ Page({
     navs: [
       {
         'name': '顺风车',
-        'icon': 'iconfont icon-carwei'
+        'icon': 'iconfont icon-carwei',
+        'type': 'freeTaxi'
       },
       {
         'name': '招聘信息',
-        'icon': 'iconfont icon-zhaopin'
+        'icon': 'iconfont icon-zhaopin',
+        'type': 'job'
       },
       {
         'name': '房屋租售',
@@ -48,6 +50,15 @@ Page({
   },
 
   onLoad: function () {
+  },
+  redirectTo(e) {
+    const currentTarget = e.currentTarget;
+    const type = currentTarget.dataset.type;
+    if (type) {
+      wx.navigateTo({
+        url: '/pages/' + type + '/' + type
+      })
+    }
   }
 
 })

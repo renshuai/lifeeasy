@@ -1,0 +1,38 @@
+<view class="page-container">
+  <view wx:if="{{data}}">
+    <view class='form-block'>
+      <text>类型</text>
+      <input value="{{data.type === '0' ? '人找车' : '车找人'}}" disabled='true'></input>
+    </view>
+    <view class='form-block'>
+      <text>出发地</text>
+      <input type='text' value='{{data.from}}' placeholder='出发地' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>目的地</text>
+      <input type='text' value='{{data.to}}' placeholder='目的地' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>出发时间</text>
+      <input value='{{data.time}}' disabled='true'></input>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{data.phone}}' placeholder='联系电话' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>乘坐人数</text>
+      <input type='number' value='{{data.number ? data.number : 1}}' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>联系人</text>
+      <input type='text' value='{{data.name}}' placeholder='联系人(非必填)' disabled='true'/>
+    </view>
+    <view class='operate-wrap'>
+      <button class='edit-btn' wx:if="{{isSelf}}" bindtap='edit'>修改</button>
+      <button class='delete-btn' wx:if="{{isSelf}}" bindtap='delete'>删除</button>
+      <button class='contact-btn' wx:if="{{!isSelf}}" bindtap='contact'>电话联系</button>
+      <button class='back-btn' bindtap='back'>返回</button>
+    </view> 
+  </view>
+</view>

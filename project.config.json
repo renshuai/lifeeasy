@@ -11,6 +11,7 @@
 	"appid": "wxe3fd8fae3c259405",
 	"projectname": "lifeeasy",
 	"libVersion": "2.2.5",
+	"compileType": "miniprogram",
 	"condition": {
 		"search": {
 			"current": -1,

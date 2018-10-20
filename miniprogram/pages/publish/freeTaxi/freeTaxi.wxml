@@ -1,0 +1,56 @@
+<view class="page-container">
+  <view>
+    <view class='form-block'>
+      <text>类型</text>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio">
+          <radio value="0" checked="{{type === '0'}}"/>人找车
+        </label>
+        <label class="radio">
+          <radio value="1" checked="{{type === '1'}}"/>车找人
+        </label>
+      </radio-group>
+    </view>
+    <view class='form-block'>
+      <text>出发地</text>
+      <input type='text' value='{{from}}' placeholder='出发地' bindblur='inputFromBlur'/>
+    </view>
+    <view class='form-block'>
+      <text>目的地</text>
+      <input type='text' value='{{to}}' placeholder='目的地' bindblur='inputToBlur'/>
+    </view>
+    <view class='form-block'>
+      <text>出发时间</text>
+      <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+        <view class="picker">
+          {{date}}
+        </view>
+      </picker>
+      <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+        <view class="picker">
+          {{time}}
+        </view>
+      </picker>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{phone}}' placeholder='联系电话' bindblur='inputPhoneBlur'/>
+    </view>
+    <view class='form-block'>
+      <text>乘坐人数</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          {{array[index]}}
+        </view>
+      </picker>
+    </view>
+    <view class='form-block'>
+      <text>联系人</text>
+      <input type='text' value='{{name}}' placeholder='联系人(非必填)' bindblur='inputNameBlur'/>
+    </view>    
+    <view class='operate-wrap'>
+      <button class='publish' bindtap='publish'>完成</button>
+      <button class='cancel' bindtap='cancel'>取消</button>
+    </view>
+  </view>
+</view>
