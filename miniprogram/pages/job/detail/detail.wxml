@@ -1,0 +1,44 @@
+<view class="page-container">
+  <view>
+    <view class='form-block'>
+      <text>类型</text>
+      <input value="{{data.type === '0' ? '招聘信息' : '求职信息'}}" disabled='true'></input>
+    </view>
+    <view class='form-block'>
+      <text>岗位名称</text>
+      <input type='text' value='{{data.job}}' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>薪资</text>
+      <input type='text' value='{{data.salary}}' disabled='true'/>
+    </view>
+    <view class='form-block-vertical'>
+      <text>工作描述</text>
+      <textarea value='{{data.description}}'  auto-height disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>工作地点</text>
+      <input type='text' value='{{data.place}}' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{data.phone}}' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>联系人</text>
+      <input type='text' value='{{data.contact}}' disabled='true'/>
+    </view>
+    <view class='form-block-vertical upload-wrap' wx:if="{{images.length}}">
+      <text>上传的照片</text>
+      <view class='photos-wrap'>
+        <image wx:for="{{images}}" src='{{item}}' mode='aspectFit' data-index='{{index}}' bindtap='showImage'></image>
+      </view>
+    </view>   
+    <view class='operate-wrap'>
+      <button class='edit-btn' wx:if="{{isSelf}}" bindtap='edit'>修改</button>
+      <button class='delete-btn' wx:if="{{isSelf}}" bindtap='delete'>删除</button>
+      <button class='contact-btn' wx:if="{{!isSelf}}" bindtap='contact'>电话联系</button>
+      <button class='back-btn' bindtap='back'>返回</button>
+    </view> 
+  </view>
+</view>

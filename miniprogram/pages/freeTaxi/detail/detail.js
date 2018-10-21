@@ -55,7 +55,7 @@ Page({
   },
   contact() {
     wx.makePhoneCall({
-      phoneNumber: data.phone
+      phoneNumber: this.data.data.phone
     })
   },
   back() {

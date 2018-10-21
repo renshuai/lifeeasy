@@ -64,14 +64,14 @@ Page({
   },
   publish() {
     wx.navigateTo({
-      url: '/pages/publish/freeTaxi/freeTaxi',
+      url: '/pages/publish/job/job',
     })
   },
   showDetail(e) {
     const currentTarget = e.currentTarget;
     const id = currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/freeTaxi/detail/detail?id=' + id
+      url: '/pages/job/detail/detail?id=' + id
     })
   }
 

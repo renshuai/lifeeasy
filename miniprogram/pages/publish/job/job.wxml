@@ -1,0 +1,50 @@
+<view class="page-container">
+  <view>
+    <view class='form-block'>
+      <text>类型</text>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio">
+          <radio value="0" checked="{{type === '0'}}"/>招聘
+        </label>
+        <label class="radio">
+          <radio value="1" checked="{{type === '1'}}"/>求职
+        </label>
+      </radio-group>
+    </view>
+    <view class='form-block'>
+      <text>岗位名称</text>
+      <input type='text' value='{{job}}' placeholder='请填写岗位名称(必填)' bindblur='inputJobBlur' adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>薪资</text>
+      <input type='text' value='{{salary}}' placeholder='填写具体薪资或者面议(非必填)' bindblur='inputSalaryBlur' adjust-position/>
+    </view>
+    <view class='form-block-vertical'>
+      <text>工作描述</text>
+      <textarea bindblur="inputDescriptionBlur" value='{{description}}'  auto-height placeholder="工作要求(非必填)" adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>工作地点</text>
+      <input type='text' value='{{place}}' placeholder='填写工作地点(非必填)' bindblur='inputPlaceBlur' adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{phone}}' placeholder='联系电话(必填)' bindblur='inputPhoneBlur' adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>联系人</text>
+      <input type='text' value='{{contact}}' placeholder='联系人(非必填)' bindblur='inputContactBlur' adjust-position/>
+    </view> 
+    <view class='form-block-vertical upload-wrap'>
+      <text>上传照片</text>
+      <view class='photos-wrap'>
+        <image wx:if="{{images.length}}" wx:for="{{images}}" src='{{item}}' mode='aspectFit' bindlongtap='delete' data-index='{{index}}' bindtap='preview'></image>
+        <view class='upload-btn' bindtap='upload'><icon class='iconfont icon-jiahao'></icon></view>
+      </view>
+    </view>   
+    <view class='operate-wrap'>
+      <button class='publish' bindtap='publish'>完成</button>
+      <button class='cancel' bindtap='cancel'>取消</button>
+    </view>
+  </view>
+</view>

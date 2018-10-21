@@ -19,8 +19,8 @@ Page({
         'icon': 'iconfont icon-fangzidichan'
       },
       {
-        'name': '本地推荐',
-        'icon': 'iconfont icon-zizhutuiguang'
+        'name': '打折优惠',
+        'icon': 'iconfont icon-youhui'
       },
       {
         'name': '车辆服务',
@@ -39,8 +39,8 @@ Page({
         'icon': 'iconfont icon-fuwu1'
       },
       {
-        'name': '打折优惠',
-        'icon': 'iconfont icon-youhui'
+        'name': '本地推荐',
+        'icon': 'iconfont icon-zizhutuiguang'
       },
       {
         'name': '土特产',
