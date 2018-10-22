@@ -8,9 +8,6 @@ Page({
     list: []
   },
   onLoad: function () {
-    wx.setNavigationBarTitle({
-      title: '顺风车'
-    });
     this.getData();
   },
   onShow() {

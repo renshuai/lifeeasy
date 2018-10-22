@@ -1,0 +1,26 @@
+<view class='page-container'>
+  <view class='tab-list'>
+    <text data-index='1' class="{{(activeIndex == '1') ? 'active' : ''}}" bindtap='tabClick'>出售</text>
+    <text data-index='2' class="{{(activeIndex == '2') ? 'active' : ''}}" bindtap='tabClick'>出租</text>
+    <text data-index='3' class="{{(activeIndex == '3') ? 'active' : ''}}" bindtap='tabClick'>求租</text>
+    <text data-index='4' class="{{(activeIndex == '4') ? 'active' : ''}}" bindtap='tabClick'>求售</text>
+  </view>
+  <view class='content-wrap'>
+    <view class='list-item' wx:for="{{list}}" wx:if="{{list.length}}" bindtap='showDetail' data-id='{{item._id}}'>
+      <view class='cover-wrap'>
+        <image src='{{item.cover}}' mode='aspectFit' wx:if="{{item.cover}}"></image>
+        <icon class='iconfont icon-tupianbaohu'  wx:if="{{!item.cover}}"></icon>
+      </view>
+      <view class='info-wrap'>
+        <view class='info-top'>
+          <text>{{item.apartment}}</text>
+        </view>
+        <view class='info-bottom'>
+          <text>{{item.description}}</text>
+        </view>
+      </view>
+      <icon class='iconfont icon-arrow-right' bindtap='showDetail' data-id='{{item._id}}'></icon>
+    </view>
+  </view>
+  <view class='add-btn' bindtap='publish'>发布</view>
+</view>

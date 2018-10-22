@@ -1,0 +1,36 @@
+<view class="page-container">
+  <view wx:if="{{data}}">
+    <view class='form-block'>
+      <text>发布类型</text>
+      <input type='text' value='{{typeArray[data.typeIndex]}}' disabled='true'></input>
+    </view>
+    <view class='form-block'>
+      <text>小区名称</text>
+      <input type='text' value='{{data.apartment}}' adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>房屋描述</text>
+      <textarea value='{{data.description}}'  auto-height adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{data.phone}}' adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>联系人</text>
+      <input type='text' value='{{data.contact}}'/>
+    </view> 
+    <view class='form-block-vertical upload-wrap' wx:if="{{images.length}}">
+      <text>上传照片</text>
+      <view class='photos-wrap'>
+        <image wx:for="{{images}}" src='{{item}}' mode='aspectFit' bindlongtap='delete' data-index='{{index}}' bindtap='preview'></image>
+      </view>
+    </view>   
+    <view class='operate-wrap'>
+      <button class='edit-btn' wx:if="{{isSelf}}" bindtap='edit'>修改</button>
+      <button class='delete-btn' wx:if="{{isSelf}}" bindtap='delete'>删除</button>
+      <button class='contact-btn' wx:if="{{!isSelf}}" bindtap='contact'>电话联系</button>
+      <button class='back-btn' bindtap='back'>返回</button>
+    </view> 
+  </view>
+</view>

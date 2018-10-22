@@ -6,9 +6,6 @@ Page({
     id: ''
   },
   onLoad(e) {
-    wx.setNavigationBarTitle({
-      title: '顺风车'
-    })
     this.setData({
       id: e.id
     }, _ => {

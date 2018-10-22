@@ -1,11 +1,10 @@
-
 @font-face {
   font-family: 'iconfont';  /* project id 881033 */
-  src: url('//at.alicdn.com/t/font_881033_sss9p9t31f.eot');
-  src: url('//at.alicdn.com/t/font_881033_sss9p9t31f.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_881033_sss9p9t31f.woff') format('woff'),
-  url('//at.alicdn.com/t/font_881033_sss9p9t31f.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_881033_sss9p9t31f.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_881033_ia6foknqae.eot');
+  src: url('//at.alicdn.com/t/font_881033_ia6foknqae.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_881033_ia6foknqae.woff') format('woff'),
+  url('//at.alicdn.com/t/font_881033_ia6foknqae.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_881033_ia6foknqae.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -75,5 +74,7 @@
 .icon-arrow-right:before { content: "\e604"; }
 
 .icon-jiahao:before { content: "\e608"; }
+
+.icon-tupianbaohu:before { content: "\e6cd"; }
 
 

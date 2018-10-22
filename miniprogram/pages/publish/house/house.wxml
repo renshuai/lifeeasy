@@ -1,0 +1,39 @@
+<view class="page-container">
+  <view>
+    <view class='form-block'>
+      <text>发布类型</text>
+      <picker bindchange="bindPickerChange" value="{{typeIndex}}" range="{{typeArray}}">
+        <view class="picker">
+          {{typeArray[typeIndex]}}
+        </view>
+      </picker>
+    </view>
+    <view class='form-block'>
+      <text>小区名称</text>
+      <input type='text' value='{{apartment}}' placeholder='请填写小区名称(非必填)' bindblur='inputApartmentBlur' adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>房屋描述</text>
+      <textarea bindblur="inputDescriptionBlur" value='{{description}}'  auto-height placeholder="房屋描述(非必填)" adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{phone}}' placeholder='联系电话(必填)' bindblur='inputPhoneBlur' adjust-position/>
+    </view>
+    <view class='form-block'>
+      <text>联系人</text>
+      <input type='text' value='{{contact}}' placeholder='联系人(非必填)' bindblur='inputContactBlur' adjust-position/>
+    </view> 
+    <view class='form-block-vertical upload-wrap'>
+      <text>上传照片</text>
+      <view class='photos-wrap'>
+        <image wx:if="{{images.length}}" wx:for="{{images}}" src='{{item}}' mode='aspectFit' bindlongtap='delete' data-index='{{index}}' bindtap='preview'></image>
+        <view class='upload-btn' bindtap='upload'><icon class='iconfont icon-jiahao'></icon></view>
+      </view>
+    </view>   
+    <view class='operate-wrap'>
+      <button class='publish' bindtap='publish'>完成</button>
+      <button class='cancel' bindtap='cancel'>取消</button>
+    </view>
+  </view>
+</view>

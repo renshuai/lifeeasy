@@ -16,7 +16,8 @@ Page({
       },
       {
         'name': '房屋租售',
-        'icon': 'iconfont icon-fangzidichan'
+        'icon': 'iconfont icon-fangzidichan',
+        'type': 'house'
       },
       {
         'name': '打折优惠',

@@ -15,7 +15,10 @@
     "pages/publish/freeTaxi/freeTaxi",
     "pages/publish/job/job",
     "pages/job/job",
-    "pages/job/detail/detail"
+    "pages/job/detail/detail",
+    "pages/house/house",
+    "pages/publish/house/house",
+    "pages/house/detail/detail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
