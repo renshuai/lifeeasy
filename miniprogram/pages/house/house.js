@@ -123,6 +123,7 @@ Page({
     })
   },
   onReachBottom() {
+    console.log('到底部了');
     this.getData();
   },
   showDetail(e) {

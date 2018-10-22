@@ -13,7 +13,7 @@ App({
     this.globalData = {
       'env': 'lifeeasy-88481e',
       'place': '交城',
-      'limit': 20
+      'limit': 8
     }
     this.onGetOpenid();
   },
