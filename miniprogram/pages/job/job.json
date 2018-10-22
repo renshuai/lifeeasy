@@ -1,1 +1,4 @@
-{}
+{
+  "navigationBarTitleText": "招聘信息",
+  "enablePullDownRefresh": true
+}

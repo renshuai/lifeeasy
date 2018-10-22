@@ -4,7 +4,7 @@
     <text data-index='1' class="{{(activeIndex == '1') ? 'active' : ''}}" bindtap='tabClick'>招聘信息</text>
     <text data-index='2' class="{{(activeIndex == '2') ? 'active' : ''}}" bindtap='tabClick'>求职信息</text>
   </view>
-  <view class='content'>
+  <view class='content-wrap'>
     <view wx:for="{{list}}" wx:if="{{list.length}}" class='list-item' bindtap='showDetail' data-id='{{item._id}}'>
       <view class='info-type' wx:if="{{item.type === '0'}}">招聘</view>
       <view class='info-type' wx:if="{{item.type === '1'}}">求职</view>
@@ -17,7 +17,6 @@
       </view>
       <icon class='iconfont icon-arrow-right' bindtap='showDetail' data-id='{{item._id}}'></icon>
     </view>
-    <view class='placeholder'></view>
   </view>
   <view class='add-btn' bindtap='publish'>发布</view>
 </view>

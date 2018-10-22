@@ -36,27 +36,6 @@
   margin-right: 10rpx;
 }
 
-.operate-wrap {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.operate-wrap button {
-  flex: 1;
-}
-
-.publish {
-  margin-right: 40rpx;
-  background-color: #FD0000;
-  color: #fff;
-}
-
-.cancel {
-  border: 1px solid #FD0000;
-  color: #FD0000;
-}
-
 .photos-wrap {
   display: flex;
   align-items: center;
@@ -111,4 +90,5 @@
 .back-btn {
   border: 1px solid #FD0000;
   color: #FD0000;
+  background-color: #fff;
 }

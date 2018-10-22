@@ -35,6 +35,18 @@ Page({
     })
   },
   delete() {
+    wx.showModal({
+      title: '删除提示',
+      content: '确定要删除这条信息吗？',
+      success: res => {
+        if (res.confirm) {
+          // 点击确定按钮
+          this.deleteHandler();
+        }
+      }
+    })
+  },
+  deleteHandler() {
     wx.showLoading({
       title: '删除中'
     })

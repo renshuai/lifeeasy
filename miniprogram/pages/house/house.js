@@ -12,7 +12,15 @@ Page({
     list4: []
   },
   onShow() {
-    this.getData();
+    this.setData({
+      list: [],
+      list1: [],
+      list2: [],
+      list3: [],
+      list4: []
+    }, _ => {
+      this.getData();
+    })
   },
   tabClick(e) {
     const currentTarget = e.currentTarget;
@@ -21,15 +29,14 @@ Page({
       activeIndex: +index,
       list: this.data['list' + index]
     }, _ => {
-      // if (!this.data['list' + this.data.activeIndex].length) {
-      //   this.getData();
-      // }
-      this.getData();
+      if (!this.data['list' + this.data.activeIndex].length) {
+        this.getData();
+      }
     })
   },
-  getData() {
+  getData(isFromPullDown,isFromBottomCallback) {
     wx.showLoading({
-      title: '加载中'
+      title: isFromPullDown ? '下拉刷新中' : '加载中'
     });
     const env = app.globalData.env;
     const db = wx.cloud.database({ env: env });
@@ -40,7 +47,7 @@ Page({
       }).limit(app.globalData.limit).skip(this.data.list.length).get().then(response => {
         wx.hideLoading();
         let data = response.data;
-        this.handleData(data);
+        this.handleData(data, isFromBottomCallback);
       })
     } else {
       db.collection('house').where({
@@ -48,12 +55,12 @@ Page({
       }).limit(app.globalData.limit).get().then(response => {
         wx.hideLoading();
         let data = response.data;
-        this.handleData(data);
+        this.handleData(data, false);
       })
     }
     
   },
-  handleData(data) {
+  handleData(data, isFromBottomCallback) {
     if (data.length > 0) {
       wx.showLoading({
         title: '加载封面图中'
@@ -108,6 +115,20 @@ Page({
           }
         }
       })
+    } else {
+      // 没有数据时，判断当前是否有列表数据
+      if (this.data.list.length) {
+        if (isFromBottomCallback) {
+          // 只有滚动到最后无数据时才提示没有
+          wx.showToast({
+            title: '没有更多了'
+          })
+        }
+      } else {
+        wx.showToast({
+          title: '暂时无数据'
+        })
+      }
     }
   },
   publish() {
@@ -123,8 +144,7 @@ Page({
     })
   },
   onReachBottom() {
-    console.log('到底部了');
-    this.getData();
+    this.getData(false, true);
   },
   showDetail(e) {
     const currentTarget = e.currentTarget;
@@ -132,6 +152,50 @@ Page({
     wx.navigateTo({
       url: '/pages/house/detail/detail?id=' + id
     })
+  },
+  onPullDownRefresh() {
+    if (this.data.activeIndex === 1) {
+      this.setData({
+        list1: [],
+        list: []
+      }, _ => {
+        wx.stopPullDownRefresh();
+        this.getData(true);
+      })
+    } else if (this.data.activeIndex === 2) {
+      this.setData({
+        list2: [],
+        list: []
+      }, _ => {
+        wx.stopPullDownRefresh();
+        this.getData(true);
+      })
+    } else if (this.data.activeIndex === 3) {
+      this.setData({
+        list3: [],
+        list: []
+      }, _ => {
+        wx.stopPullDownRefresh();
+        this.getData(true);
+      })
+    } else if (this.data.activeIndex === 4) {
+      this.setData({
+        list4: [],
+        list: []
+      }, _ => {
+        wx.stopPullDownRefresh();
+        this.getData(true);
+      })
+    }
+    // this.setData({
+    //   list: [],
+    //   list1: [],
+    //   list2: [],
+    //   list3: [],
+    //   list4: []
+    // }, _ => {
+    //   this.getData();
+    // })
   }
 
 })

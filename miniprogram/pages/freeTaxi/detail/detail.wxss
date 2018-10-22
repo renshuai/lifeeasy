@@ -54,4 +54,5 @@
 .back-btn {
   border: 1px solid #FD0000;
   color: #FD0000;
+  background-color: #fff;
 }
