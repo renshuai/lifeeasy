@@ -1,16 +1,21 @@
 const app = getApp()
+const util = require('../../../utils/util.js');
 
 Page({
   data: {
     id: '',
-    typeArray: ['房屋出售', '房屋出租', '房屋求租', '房屋求售'],
-    typeIndex: 0,
-    apartment: '',
+    seller: '',
     description: '',
     phone: '',
-    contact: '',
     images: [],
-    fileIds: []
+    fileIds: [],
+    position: '点我选择位置',
+    address: '',
+    latitude: '',
+    longitude: '',
+    from: '',
+    to: '',
+    markers: []
   },
   onLoad(e) {
     // 先判断是否是修改还是新添加
@@ -21,16 +26,20 @@ Page({
       // 有id值说明是修改
       const env = app.globalData.env;
       const db = wx.cloud.database({ env: env });
-      db.collection('house').doc(e.id).get().then(response => {
+      db.collection('sale').doc(e.id).get().then(response => {
         wx.hideLoading();
         const data = response.data;
         this.setData({
-          typeIndex: (+data.typeIndex - 1),
-          apartment: data.apartment,
+          seller: data.seller,
           description: data.description,
           phone: data.phone,
-          contact: data.contact,
+          position: data.position || '点我选择位置',
+          address: data.address,
+          latitude: data.latitude,
+          longitude: data.longitude,
           fileIds: data.fileIds,
+          from: data.from,
+          to: data.to,
           id: e.id
         }, _ => {
           const promises = [];
@@ -58,12 +67,24 @@ Page({
               }
             });
           }
+          // 显示地图位置点
+          if (data.latitude) {
+            const markers = [{
+              latitude: data.latitude,
+              longitude: data.longitude
+            }];
+            this.setData({
+              markers: markers
+            })
+          }
         })
       })
+    } else {
+      this.initDate();
     }
   },
   publish() {
-    if ((!this.data.apartment && !this.data.description) || !this.data.phone) {
+    if (!this.data.seller || !this.data.description || !this.data.phone) {
       wx.showToast({
         title: '必填项不能为空'
       })
@@ -75,14 +96,18 @@ Page({
       wx.showLoading({
         title: '修改中'
       });
-      db.collection('house').doc(this.data.id).update({
+      db.collection('sale').doc(this.data.id).update({
         data: {
-          typeIndex: (+this.data.typeIndex + 1),
-          apartment: this.data.apartment,
+          seller: this.data.seller,
           description: this.data.description,
           phone: this.data.phone,
-          contact: this.data.contact,
+          position: (this.data.latitude ?  this.data.position : ''),
+          address: this.data.address,
+          latitude: this.data.latitude,
+          longitude: this.data.longitude,
           fileIds: this.data.fileIds,
+          from: this.data.from,
+          to: this.data.to,
           timestamp: Date.parse(new Date())
         }
       }).then(_ => {
@@ -100,14 +125,18 @@ Page({
       wx.showLoading({
         title: '发布中'
       });
-      db.collection('house').add({
+      db.collection('sale').add({
         data: {
-          typeIndex: (+this.data.typeIndex + 1),
-          apartment: this.data.apartment,
+          seller: this.data.seller,
           description: this.data.description,
           phone: this.data.phone,
-          contact: this.data.contact,
+          position: (this.data.latitude ? this.data.position : ''),
+          address: this.data.address,
+          latitude: this.data.latitude,
+          longitude: this.data.longitude,
           fileIds: this.data.fileIds,
+          from: this.data.from,
+          to: this.data.to,
           timestamp: Date.parse(new Date())
         }
       }).then(response => {
@@ -129,14 +158,9 @@ Page({
       delta: 1
     })
   },
-  bindPickerChange: function (e) {
+  inputSellerBlur(e) {
     this.setData({
-      typeIndex: +e.detail.value
-    })
-  },
-  inputApartmentBlur(e) {
-    this.setData({
-      apartment: e.detail.value
+      seller: e.detail.value
     })
   },
   inputPhoneBlur(e) {
@@ -144,14 +168,32 @@ Page({
       phone: e.detail.value
     })
   },
-  inputContactBlur(e) {
-    this.setData({
-      contact: e.detail.value
-    })
-  },
   inputDescriptionBlur(e) {
     this.setData({
       description: e.detail.value
+    })
+  },
+  bindFromDateChange(e) {
+    this.setData({
+      from: e.detail.value
+    })
+  },
+  bindToDateChange(e) {
+    this.setData({
+      to: e.detail.value
+    })
+  },
+  initDate() {
+    const date = new Date();
+    const date1 = new Date();
+    let timestamp = Date.parse(date1);
+    // 默认优惠时间段为一周
+    date1.setTime(timestamp + 7 * 24 * 60 * 60 * 1000);
+    const timeObj = util.formatTime(date);
+    const timeObj1 = util.formatTime(date1);
+    this.setData({
+      from: timeObj.date,
+      to: timeObj1.date,
     })
   },
   upload() {
@@ -233,6 +275,23 @@ Page({
     wx.previewImage({
       urls: this.data.images,
       current: index
+    })
+  },
+  choosePosition() {
+    wx.chooseLocation({
+      success: (res) => {
+        console.log(res);
+        this.setData({
+          position: res.name,
+          address: res.address,
+          latitude: res.latitude,
+          longitude: res.longitude,
+          markers: [{
+            latitude: res.latitude,
+            longitude: res.longitude,
+          }]
+        })
+      }
     })
   }
 })

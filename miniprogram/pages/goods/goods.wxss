@@ -84,7 +84,27 @@
   flex: 1;
 }
 
-.info-bottom {
+.info-basic {
+  display: flex;
+  align-items: center;
+}
+.goods-name {
+  margin-right: 15rpx;
+}
+.goods-price {
+  flex: 1;
+}
+
+.info-description {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #FD0000;
+  font-size: 13px;
+}
+
+.info-address {
   color: #aaa;
   font-size: 12px;
 }

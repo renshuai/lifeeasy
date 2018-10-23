@@ -15,9 +15,6 @@ Page({
     phone: ''
   },
   onLoad(e) {
-    wx.setNavigationBarTitle({
-      title: '顺风车-信息发布'
-    });
     // 先判断是否是修改还是新添加
     if (e.id) {
       wx.showLoading({

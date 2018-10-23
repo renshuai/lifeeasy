@@ -21,7 +21,8 @@ Page({
       },
       {
         'name': '打折优惠',
-        'icon': 'iconfont icon-youhui'
+        'icon': 'iconfont icon-youhui',
+        'type': 'sale'
       },
       {
         'name': '车辆服务',
@@ -29,11 +30,12 @@ Page({
       },
       {
         'name': '物品交易',
-        'icon': 'iconfont icon-ershoushebei'
+        'icon': 'iconfont icon-ershoushebei',
+        'type': 'goods'
       },
       {
         'name': '本地服务',
-        'icon': 'iconfont icon-fuwu'
+        'icon': 'iconfont icon-service1'
       },
       {
         'name': '打听求助',
@@ -45,7 +47,8 @@ Page({
       },
       {
         'name': '土特产',
-        'icon': 'iconfont icon-tutechan'
+        'icon': 'iconfont icon-tutechan',
+        'type': 'speciality'
       }
     ]
   },
@@ -58,6 +61,10 @@ Page({
     if (type) {
       wx.navigateTo({
         url: '/pages/' + type + '/' + type
+      })
+    } else {
+      wx.showToast({
+        title: '开发中'
       })
     }
   }

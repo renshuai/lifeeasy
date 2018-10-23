@@ -18,7 +18,16 @@
     "pages/job/detail/detail",
     "pages/house/house",
     "pages/publish/house/house",
-    "pages/house/detail/detail"
+    "pages/house/detail/detail",
+    "pages/sale/sale",
+    "pages/sale/detail/detail",
+    "pages/publish/sale/sale",
+    "pages/goods/goods",
+    "pages/goods/detail/detail",
+    "pages/publish/goods/goods",
+    "pages/speciality/speciality",
+    "pages/speciality/detail/detail",
+    "pages/publish/speciality/speciality"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

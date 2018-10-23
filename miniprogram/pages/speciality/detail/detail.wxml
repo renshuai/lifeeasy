@@ -1,0 +1,48 @@
+<view class="page-container">
+  <view>
+    <view class='form-block'>
+      <text>发布类型</text>
+      <input type='text' value="{{data.type === 0 ? '卖物品' : '买物品'}}" disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>物品名称</text>
+      <input type='text' value='{{data.speciality}}' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>新旧描述</text>
+      <textarea value='{{data.description}}'  auto-height disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>物品价格</text>
+      <input type='number' value='{{data.price}}' placeholder='暂无' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{data.phone}}' placeholder='联系电话(必填)' disabled='true'/>
+    </view>
+    <view class='form-block'>
+      <text>联系人</text>
+      <input type='text' value='{{data.contact}}' disabled='true'/>
+    </view> 
+    <view class='form-block-vertical'>
+      <view class='position-info-wrap'>
+        <text>交易地点</text>
+        <input type='text' value='{{data.position}}' disabled='true'/>
+        <view class='navigation' bindtap='navigation' wx:if="{{data.latitude && data.longitude}}">导航</view>
+      </view>
+      <map longitude="{{data.longitude}}" latitude="{{data.latitude}}" show-location="true" markers='{{markers}}' wx:if="{{data.longitude && data.latitude}}"></map>
+    </view>
+    <view class='form-block-vertical upload-wrap' wx:if="{{images.length}}">
+      <text>上传照片</text>
+      <view class='photos-wrap'>
+        <image wx:if="{{images.length}}" wx:for="{{images}}" src='{{item}}' mode='aspectFit' data-index='{{index}}' bindtap='preview'></image>
+      </view>
+    </view>   
+    <view class='operate-wrap'>
+      <button class='edit-btn' wx:if="{{isSelf}}" bindtap='edit'>修改</button>
+      <button class='delete-btn' wx:if="{{isSelf}}" bindtap='delete'>删除</button>
+      <button class='contact-btn' wx:if="{{!isSelf}}" bindtap='contact'>电话联系</button>
+      <button class='back-btn' bindtap='back'>返回</button>
+    </view> 
+  </view>
+</view>

@@ -1,0 +1,23 @@
+<view class='page-container'>
+  <view class='content-wrap'>
+    <view class='list-item' wx:for="{{list}}" wx:if="{{list.length}}" bindtap='showDetail' data-id='{{item._id}}'>
+      <view class='cover-wrap'>
+        <image src='{{item.cover}}' mode='aspectFit' wx:if="{{item.cover}}"></image>
+        <icon class='iconfont icon-tupianbaohu'  wx:if="{{!item.cover}}"></icon>
+      </view>
+      <view class='info-wrap'>
+        <view class='info-basic'>
+          <text class='seller-name'>{{item.seller}}</text>
+          <text wx:if="{{item.from}}" class='date-range'>{{item.from}}至{{item.to}}</text>
+        </view>
+        <view class='info-description'>
+          <text>{{item.description}}</text>
+        </view>
+        <view class='info-address' wx:if="{{item.address}}">{{item.address}}</view>
+
+      </view>
+      <icon class='iconfont icon-arrow-right' bindtap='showDetail' data-id='{{item._id}}'></icon>
+    </view>
+  </view>
+  <view class='add-btn' bindtap='publish'>发布</view>
+</view>

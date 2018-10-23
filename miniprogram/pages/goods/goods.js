@@ -4,20 +4,18 @@ const util = require('../../utils/util.js');
 
 Page({
   data: {
-    activeIndex: 1,
+    activeIndex: 0,
     list: [],
+    list0: [],
     list1: [],
     list2: [],
-    list3: [],
-    list4: []
   },
   onShow() {
     this.setData({
       list: [],
       list1: [],
       list2: [],
-      list3: [],
-      list4: []
+      list0: [],
     }, _ => {
       this.getData();
     })
@@ -34,7 +32,7 @@ Page({
       }
     })
   },
-  getData(isFromPullDown,isFromBottomCallback) {
+  getData(isFromPullDown, isFromBottomCallback) {
     wx.showLoading({
       title: isFromPullDown ? '下拉刷新中' : '加载中'
     });
@@ -42,23 +40,39 @@ Page({
     const db = wx.cloud.database({ env: env });
     // 根据当前数据确定是否需要skip
     if (this.data.list.length > 0) {
-      db.collection('house').where({
-        typeIndex: +this.data.activeIndex
-      }).limit(app.globalData.limit).skip(this.data.list.length).get().then(response => {
-        wx.hideLoading();
-        let data = response.data;
-        this.handleData(data, isFromBottomCallback);
-      })
+      if (+this.data.activeIndex === 0) {
+        db.collection('goods').limit(app.globalData.limit).skip(this.data.list.length).get().then(response => {
+          wx.hideLoading();
+          let data = response.data;
+          this.handleData(data, isFromBottomCallback);
+        })
+      } else {
+        db.collection('goods').where({
+          type: (+this.data.activeIndex - 1)
+        }).limit(app.globalData.limit).skip(this.data.list.length).get().then(response => {
+          wx.hideLoading();
+          let data = response.data;
+          this.handleData(data, isFromBottomCallback);
+        })
+      }
+      
     } else {
-      db.collection('house').where({
-        typeIndex: +this.data.activeIndex
-      }).limit(app.globalData.limit).get().then(response => {
-        wx.hideLoading();
-        let data = response.data;
-        this.handleData(data, false);
-      })
+      if (this.data.activeIndex === 0) {
+        db.collection('goods').limit(app.globalData.limit).get().then(response => {
+          wx.hideLoading();
+          let data = response.data;
+          this.handleData(data, false);
+        })
+      } else {
+        db.collection('goods').where({
+          type: (+this.data.activeIndex - 1)
+        }).limit(app.globalData.limit).get().then(response => {
+          wx.hideLoading();
+          let data = response.data;
+          this.handleData(data, false);
+        })
+      }
     }
-    
   },
   handleData(data, isFromBottomCallback) {
     if (data.length > 0) {
@@ -88,7 +102,13 @@ Page({
               data[index]['cover'] = item.tempFilePath;
             }
           })
-          if (+this.data.activeIndex === 1) {
+          if (+this.data.activeIndex === 0) {
+            const list0 = [...this.data.list0, ...data];
+            this.setData({
+              list0: list0,
+              list: list0
+            })
+          } else if(+this.data.activeIndex === 1) {
             const list1 = [...this.data.list1, ...data];
             this.setData({
               list1: list1,
@@ -99,18 +119,6 @@ Page({
             this.setData({
               list2: list2,
               list: list2
-            })
-          } else if (+this.data.activeIndex === 3) {
-            const list3 = [...this.data.list3, ...data];
-            this.setData({
-              list3: list3,
-              list: list3
-            })
-          } else if (+this.data.activeIndex === 4) {
-            const list4 = [...this.data.list4, ...data];
-            this.setData({
-              list4: list4,
-              list: list4
             })
           }
         }
@@ -133,21 +141,29 @@ Page({
   },
   publish() {
     wx.navigateTo({
-      url: '/pages/publish/house/house',
+      url: '/pages/publish/goods/goods',
     })
   },
   showDetail(e) {
     const currentTarget = e.currentTarget;
     const id = currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/house/detail/detail?id=' + id
+      url: '/pages/goods/detail/detail?id=' + id
     })
   },
   onReachBottom() {
     this.getData(false, true);
   },
   onPullDownRefresh() {
-    if (this.data.activeIndex === 1) {
+    if (this.data.activeIndex === 0) {
+      this.setData({
+        list0: [],
+        list: []
+      }, _ => {
+        wx.stopPullDownRefresh();
+        this.getData(true);
+      })
+    } else if (this.data.activeIndex === 1) {
       this.setData({
         list1: [],
         list: []
@@ -163,32 +179,7 @@ Page({
         wx.stopPullDownRefresh();
         this.getData(true);
       })
-    } else if (this.data.activeIndex === 3) {
-      this.setData({
-        list3: [],
-        list: []
-      }, _ => {
-        wx.stopPullDownRefresh();
-        this.getData(true);
-      })
-    } else if (this.data.activeIndex === 4) {
-      this.setData({
-        list4: [],
-        list: []
-      }, _ => {
-        wx.stopPullDownRefresh();
-        this.getData(true);
-      })
     }
-    // this.setData({
-    //   list: [],
-    //   list1: [],
-    //   list2: [],
-    //   list3: [],
-    //   list4: []
-    // }, _ => {
-    //   this.getData();
-    // })
   }
 
 })

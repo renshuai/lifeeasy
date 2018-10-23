@@ -1,0 +1,29 @@
+<view class='page-container'>
+  <view class='tab-list'>
+    <text data-index='0' class="{{(activeIndex == 0) ? 'active' : ''}}" bindtap='tabClick'>全部</text>
+    <text data-index='1' class="{{(activeIndex == 1) ? 'active' : ''}}" bindtap='tabClick'>卖特产</text>
+    <text data-index='2' class="{{(activeIndex == 2) ? 'active' : ''}}" bindtap='tabClick'>买特产</text>
+  </view>
+  <view class='content-wrap'>
+    <view class='list-item' wx:for="{{list}}" wx:if="{{list.length}}" bindtap='showDetail' data-id='{{item._id}}'>
+      <view class='cover-wrap'>
+        <image src='{{item.cover}}' mode='aspectFit' wx:if="{{item.cover}}"></image>
+        <icon class='iconfont icon-tupianbaohu'  wx:if="{{!item.cover}}"></icon>
+      </view>
+      <view class='info-wrap'>
+        <view class='info-basic'>
+          <text class='goods-name'>{{item.speciality}}</text>
+          <text class='goods-price'>{{item.price}}</text>
+        </view>
+        <view class='info-description'>
+          <text>{{item.description}}</text>
+        </view>
+        <view class='info-address' wx:if="{{item.address}}">
+          <text>{{item.address}}</text>
+        </view>
+      </view>
+      <icon class='iconfont icon-arrow-right' bindtap='showDetail' data-id='{{item._id}}'></icon>
+    </view>
+  </view>
+  <view class='add-btn' bindtap='publish'>发布</view>
+</view>

@@ -1,0 +1,54 @@
+<view class="page-container">
+  <view>
+    <view class='form-block'>
+      <text>商家名称</text>
+      <input type='text' value='{{seller}}' placeholder='请输入商家名称(必填)' bindblur='inputSellerBlur' adjust-position/>
+    </view>
+    <view class='form-block-vertical'>
+      <text>优惠详情</text>
+      <textarea bindblur="inputDescriptionBlur" value='{{description}}'  auto-height placeholder="具体优惠情况(必填)" adjust-position/>
+    </view>
+    <view class='form-block-vertical'>
+      <text>优惠时间</text>
+      <view class='date-range-wrap'>
+        <picker mode="date" value="{{from}}" bindchange="bindFromDateChange">
+          <view class="picker">
+            {{from}}
+          </view>
+        </picker>
+        <text>———</text>
+        <picker mode="date" value="{{to}}" bindchange="bindToDateChange">
+          <view class="picker">
+            {{to}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{phone}}' placeholder='联系电话(必填)' bindblur='inputPhoneBlur' adjust-position/>
+    </view>
+    <view class='form-block-vertical'>
+      <view class='position-info-wrap'>
+        <text>店铺位置</text>
+        <view class='choose-btn' bindtap='choosePosition'>{{position}}</view>
+      </view>
+      <map longitude="{{longitude}}" latitude="{{latitude}}" show-location="true" markers='{{markers}}' wx:if="{{longitude && latitude}}"></map>
+    </view>
+    <!-- <view class='form-block'>
+      <text>店铺位置</text>
+      <view class='choose-btn' bindtap='choosePosition'>{{position}}</view>
+    </view> -->
+    <view class='form-block-vertical upload-wrap'>
+      <text>上传照片</text>
+      <view class='photos-wrap'>
+        <image wx:if="{{images.length}}" wx:for="{{images}}" src='{{item}}' mode='aspectFit' bindlongtap='delete' data-index='{{index}}' bindtap='preview'></image>
+        <view class='upload-btn' bindtap='upload'><icon class='iconfont icon-jiahao'></icon></view>
+      </view>
+    </view>   
+    <view class='operate-wrap'>
+      <button class='publish' bindtap='publish'>完成</button>
+      <button class='cancel' bindtap='cancel'>取消</button>
+    </view>
+  </view>
+</view>

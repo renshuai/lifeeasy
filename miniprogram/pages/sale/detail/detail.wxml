@@ -1,0 +1,40 @@
+<view class="page-container">
+  <view>
+    <view class='form-block'>
+      <text>商家名称</text>
+      <input type='text' value='{{data.seller}}' disabled='true'/>
+    </view>
+    <view class='form-block-vertical'>
+      <text>优惠详情</text>
+      <textarea value='{{data.description}}'  auto-height disabled='true'/>
+    </view>
+    <view class='form-block-vertical'>
+      <text>优惠时间</text>
+      <view>{{data.from}} 至 {{data.to}}</view>
+    </view>
+    <view class='form-block'>
+      <text>联系电话</text>
+      <input type='number' value='{{data.phone}}' disabled='true'/>
+    </view>
+    <view class='form-block-vertical'>
+      <view class='position-info-wrap'>
+        <text>店铺位置</text>
+        <input type='text' value='{{data.position}}' disabled='true'/>
+        <view class='navigation' bindtap='navigation' wx:if="{{data.latitude && data.longitude}}">导航</view>
+      </view>
+      <map longitude="{{data.longitude}}" latitude="{{data.latitude}}" show-location="true" markers='{{markers}}' wx:if="{{data.latitude && data.longitude}}"></map>
+    </view>
+    <view class='form-block-vertical upload-wrap'>
+      <text>上传照片</text>
+      <view class='photos-wrap'>
+        <image wx:if="{{images.length}}" wx:for="{{images}}" src='{{item}}' mode='aspectFit'  data-index='{{index}}' bindtap='preview'></image>
+      </view>
+    </view>   
+    <view class='operate-wrap'>
+      <button class='edit-btn' wx:if="{{isSelf}}" bindtap='edit'>修改</button>
+      <button class='delete-btn' wx:if="{{isSelf}}" bindtap='delete'>删除</button>
+      <button class='contact-btn' wx:if="{{!isSelf}}" bindtap='contact'>电话联系</button>
+      <button class='back-btn' bindtap='back'>返回</button>
+    </view> 
+  </view>
+</view>

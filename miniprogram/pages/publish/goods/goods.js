@@ -3,14 +3,19 @@ const app = getApp()
 Page({
   data: {
     id: '',
-    typeArray: ['房屋出售', '房屋出租', '房屋求租', '房屋求售'],
-    typeIndex: 0,
-    apartment: '',
+    type: 0,
+    goods: '',
     description: '',
+    price: '',
     phone: '',
     contact: '',
     images: [],
-    fileIds: []
+    fileIds: [],
+    position: '点我选择位置',
+    address: '',
+    latitude: '',
+    longitude: '',
+    markers: []
   },
   onLoad(e) {
     // 先判断是否是修改还是新添加
@@ -21,16 +26,21 @@ Page({
       // 有id值说明是修改
       const env = app.globalData.env;
       const db = wx.cloud.database({ env: env });
-      db.collection('house').doc(e.id).get().then(response => {
+      db.collection('goods').doc(e.id).get().then(response => {
         wx.hideLoading();
         const data = response.data;
         this.setData({
-          typeIndex: (+data.typeIndex - 1),
-          apartment: data.apartment,
+          type: +data.type,
+          goods: data.goods,
           description: data.description,
+          price: data.price,
           phone: data.phone,
           contact: data.contact,
           fileIds: data.fileIds,
+          position: (data.latitude ? data.position : '点我选择位置'),
+          address: data.address,
+          latitude: data.latitude,
+          longitude: data.longitude,
           id: e.id
         }, _ => {
           const promises = [];
@@ -63,7 +73,7 @@ Page({
     }
   },
   publish() {
-    if ((!this.data.apartment && !this.data.description) || !this.data.phone) {
+    if ((!this.data.goods && !this.data.description) || !this.data.phone) {
       wx.showToast({
         title: '必填项不能为空'
       })
@@ -75,14 +85,19 @@ Page({
       wx.showLoading({
         title: '修改中'
       });
-      db.collection('house').doc(this.data.id).update({
+      db.collection('goods').doc(this.data.id).update({
         data: {
-          typeIndex: (+this.data.typeIndex + 1),
-          apartment: this.data.apartment,
+          type: +this.data.type,
+          goods: this.data.goods,
+          price: this.data.price,
           description: this.data.description,
           phone: this.data.phone,
           contact: this.data.contact,
           fileIds: this.data.fileIds,
+          position: (this.data.latitude ? this.data.position : ''),
+          address: this.data.address,
+          latitude: this.data.latitude,
+          longitude: this.data.longitude,
           timestamp: Date.parse(new Date())
         }
       }).then(_ => {
@@ -100,14 +115,19 @@ Page({
       wx.showLoading({
         title: '发布中'
       });
-      db.collection('house').add({
+      db.collection('goods').add({
         data: {
-          typeIndex: (+this.data.typeIndex + 1),
-          apartment: this.data.apartment,
+          type: +this.data.type,
+          goods: this.data.goods,
+          price: this.data.price,
           description: this.data.description,
           phone: this.data.phone,
           contact: this.data.contact,
           fileIds: this.data.fileIds,
+          position: (this.data.latitude ? this.data.position : ''),
+          address: this.data.address,
+          latitude: this.data.latitude,
+          longitude: this.data.longitude,
           timestamp: Date.parse(new Date())
         }
       }).then(response => {
@@ -129,14 +149,19 @@ Page({
       delta: 1
     })
   },
-  bindPickerChange: function (e) {
+  radioChange(e) {
     this.setData({
-      typeIndex: +e.detail.value
+      type: +e.detail.value
     })
   },
-  inputApartmentBlur(e) {
+  inputGoodsBlur(e) {
     this.setData({
-      apartment: e.detail.value
+      goods: e.detail.value
+    })
+  },
+  inputPriceBlur(e) {
+    this.setData({
+      price: e.detail.value
     })
   },
   inputPhoneBlur(e) {
@@ -233,6 +258,23 @@ Page({
     wx.previewImage({
       urls: this.data.images,
       current: index
+    })
+  },
+  choosePosition() {
+    wx.chooseLocation({
+      success: (res) => {
+        console.log(res);
+        this.setData({
+          position: res.name,
+          address: res.address,
+          latitude: res.latitude,
+          longitude: res.longitude,
+          markers: [{
+            latitude: res.latitude,
+            longitude: res.longitude,
+          }]
+        })
+      }
     })
   }
 })
