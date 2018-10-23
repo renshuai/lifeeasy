@@ -39,7 +39,8 @@ Page({
       },
       {
         'name': '打听求助',
-        'icon': 'iconfont icon-fuwu1'
+        'icon': 'iconfont icon-fuwu1',
+        'type': 'help'
       },
       {
         'name': '本地推荐',

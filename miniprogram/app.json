@@ -27,7 +27,10 @@
     "pages/publish/goods/goods",
     "pages/speciality/speciality",
     "pages/speciality/detail/detail",
-    "pages/publish/speciality/speciality"
+    "pages/publish/speciality/speciality",
+    "pages/help/help",
+    "pages/help/detail/detail",
+    "pages/publish/help/help"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
