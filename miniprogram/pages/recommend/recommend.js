@@ -4,32 +4,13 @@ const util = require('../../utils/util.js');
 
 Page({
   data: {
-    activeIndex: 0,
     list: [],
-    list0: [],
-    list1: [],
-    list2: []
   },
   onShow() {
     this.setData({
-      list: [],
-      list0: [],
-      list1: [],
-      list2: []
+      list: []
     }, _ => {
       this.getData();
-    })
-  },
-  tabClick(e) {
-    const currentTarget = e.currentTarget;
-    const index = currentTarget.dataset.index;
-    this.setData({
-      activeIndex: +index,
-      list: this.data['list' + index]
-    }, _ => {
-      if (!this.data['list' + this.data.activeIndex].length) {
-        this.getData();
-      }
     })
   },
   getData(isFromPullDown, isFromBottomCallback) {
@@ -40,16 +21,12 @@ Page({
     const db = wx.cloud.database({ env: env });
     // 根据当前数据确定是否需要skip
     if (this.data.list.length > 0) {
-      db.collection('help').where({
-        typeIndex: +this.data.activeIndex
-      }).limit(app.globalData.limit).skip(this.data.list.length).get().then(response => {
+      db.collection('recommend').limit(app.globalData.limit).skip(this.data.list.length).get().then(response => {
         let data = response.data;
         this.handleData(data, isFromBottomCallback);
       })
     } else {
-      db.collection('help').where({
-        typeIndex: +this.data.activeIndex
-      }).limit(app.globalData.limit).get().then(response => {
+      db.collection('recommend').limit(app.globalData.limit).get().then(response => {
         wx.hideLoading();
         let data = response.data;
         this.handleData(data, false);
@@ -82,25 +59,10 @@ Page({
               data[index]['cover'] = item.tempFilePath;
             }
           })
-          if (+this.data.activeIndex === 0) {
-            const list0 = [...this.data.list0, ...data];
-            this.setData({
-              list0: list0,
-              list: list0
-            })
-          } if (+this.data.activeIndex === 1) {
-            const list1 = [...this.data.list1, ...data];
-            this.setData({
-              list1: list1,
-              list: list1
-            })
-          } else if (+this.data.activeIndex === 2) {
-            const list2 = [...this.data.list2, ...data];
-            this.setData({
-              list2: list2,
-              list: list2
-            })
-          } 
+          const list = [...this.data.list, ...data];
+          this.setData({
+            list: list
+          })
         }
       })
     } else {
@@ -122,45 +84,26 @@ Page({
   },
   publish() {
     wx.navigateTo({
-      url: '/pages/publish/help/help',
+      url: '/pages/publish/recommend/recommend',
     })
   },
   showDetail(e) {
     const currentTarget = e.currentTarget;
     const id = currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/help/detail/detail?id=' + id
+      url: '/pages/recommend/detail/detail?id=' + id
     })
   },
   onReachBottom() {
     this.getData(false, true);
   },
   onPullDownRefresh() {
-    if(this.data.activeIndex === 0) {
-      this.setData({
-        list0: [],
-        list: []
-      }, _ => {
-        wx.stopPullDownRefresh();
-        this.getData(true);
-      })
-    } else if (this.data.activeIndex === 1) {
-      this.setData({
-        list1: [],
-        list: []
-      }, _ => {
-        wx.stopPullDownRefresh();
-        this.getData(true);
-      })
-    } else if (this.data.activeIndex === 2) {
-      this.setData({
-        list2: [],
-        list: []
-      }, _ => {
-        wx.stopPullDownRefresh();
-        this.getData(true);
-      })
-    }
+    this.setData({
+      list: []
+    }, _ => {
+      wx.stopPullDownRefresh();
+      this.getData(true);
+    })
   }
 
 })

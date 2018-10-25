@@ -44,7 +44,8 @@ Page({
       },
       {
         'name': '本地推荐',
-        'icon': 'iconfont icon-zizhutuiguang'
+        'icon': 'iconfont icon-zizhutuiguang',
+        'type': 'recommend'
       },
       {
         'name': '土特产',

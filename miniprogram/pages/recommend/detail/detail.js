@@ -5,7 +5,6 @@ Page({
     isSelf: false,
     id: '',
     images: [],
-    typeArray: ['问题求助', '寻人', '寻物']
   },
   onLoad(e) {
     this.setData({
@@ -21,7 +20,7 @@ Page({
     })
     const env = app.globalData.env;
     const db = wx.cloud.database({ env: env });
-    db.collection('help').doc(this.data.id).get().then(response => {
+    db.collection('recommend').doc(this.data.id).get().then(response => {
       this.setData({
         data: response.data,
         isSelf: app.globalData.openid === response.data._openid
@@ -56,7 +55,7 @@ Page({
   },
   edit() {
     wx.navigateTo({
-      url: '/pages/publish/help/help?id=' + this.data.id
+      url: '/pages/publish/recommend/recommend?id=' + this.data.id
     })
   },
   delete() {
@@ -77,7 +76,7 @@ Page({
     })
     const env = app.globalData.env;
     const db = wx.cloud.database({ env: env });
-    db.collection('help').doc(this.data.id).remove().then(_ => {
+    db.collection('recommend').doc(this.data.id).remove().then(_ => {
       wx.hideLoading();
       wx.showToast({
         title: '删除成功'

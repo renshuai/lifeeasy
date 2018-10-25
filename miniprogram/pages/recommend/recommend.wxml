@@ -1,9 +1,4 @@
 <view class='page-container'>
-  <view class='tab-list'>
-    <text data-index='0' class="{{(activeIndex == 0) ? 'active' : ''}}" bindtap='tabClick'>问题求助</text>
-    <text data-index='1' class="{{(activeIndex == 1) ? 'active' : ''}}" bindtap='tabClick'>寻人</text>
-    <text data-index='2' class="{{(activeIndex == 2) ? 'active' : ''}}" bindtap='tabClick'>寻物</text>
-  </view>
   <view class='content-wrap'>
     <view class='list-item' wx:for="{{list}}" wx:if="{{list.length}}" bindtap='showDetail' data-id='{{item._id}}'>
       <view class='cover-wrap'>
@@ -15,7 +10,7 @@
           <text>{{item.title}}</text>
         </view>
         <view class='info-bottom'>
-          <text>{{item.description}}</text>
+          <text>{{item.reason}}</text>
         </view>
       </view>
       <icon class='iconfont icon-arrow-right' bindtap='showDetail' data-id='{{item._id}}'></icon>

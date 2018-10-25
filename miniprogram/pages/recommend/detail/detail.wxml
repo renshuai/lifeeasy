@@ -1,16 +1,12 @@
 <view class="page-container">
   <view>
     <view class='form-block'>
-      <text>发布类型</text>
-      <input type='text' value="{{typeArray[data.typeIndex]}}" disabled='true'/>
-    </view>
-    <view class='form-block'>
-      <text>标题</text>
+      <text>推荐内容</text>
       <input type='text' value='{{data.title}}' disabled='true'/>
     </view>
     <view class='form-block-vertical'>
-      <text>详细描述</text>
-      <textarea value='{{data.description}}'  auto-height disabled='true'/>
+      <text>推荐理由</text>
+      <textarea value='{{data.reason}}'  auto-height disabled='true'/>
     </view>
     <view class='form-block'>
       <text>联系电话</text>

@@ -3,10 +3,8 @@ const app = getApp()
 Page({
   data: {
     id: '',
-    typeArray: ['问题求助', '寻人', '寻物'],
-    typeIndex: 0,
     title: '',
-    description: '',
+    reason: '',
     phone: '',
     contact: '',
     images: [],
@@ -21,12 +19,11 @@ Page({
       // 有id值说明是修改
       const env = app.globalData.env;
       const db = wx.cloud.database({ env: env });
-      db.collection('help').doc(e.id).get().then(response => {
+      db.collection('recommend').doc(e.id).get().then(response => {
         const data = response.data;
         this.setData({
-          typeIndex: +data.typeIndex,
           title: data.title,
-          description: data.description,
+          reason: data.reason,
           phone: data.phone,
           contact: data.contact,
           fileIds: data.fileIds,
@@ -61,7 +58,7 @@ Page({
     }
   },
   publish() {
-    if (!this.data.title || !this.data.phone) {
+    if (!this.data.title || !this.data.reason || !this.data.phone) {
       wx.showToast({
         title: '必填项不能为空'
       })
@@ -73,11 +70,10 @@ Page({
       wx.showLoading({
         title: '修改中'
       });
-      db.collection('help').doc(this.data.id).update({
+      db.collection('recommend').doc(this.data.id).update({
         data: {
-          typeIndex: +this.data.typeIndex,
           title: this.data.title,
-          description: this.data.description,
+          reason: this.data.reason,
           phone: this.data.phone,
           contact: this.data.contact,
           fileIds: this.data.fileIds,
@@ -98,11 +94,10 @@ Page({
       wx.showLoading({
         title: '发布中'
       });
-      db.collection('help').add({
+      db.collection('recommend').add({
         data: {
-          typeIndex: +this.data.typeIndex,
           title: this.data.title,
-          description: this.data.description,
+          reason: this.data.reason,
           phone: this.data.phone,
           contact: this.data.contact,
           fileIds: this.data.fileIds,
@@ -122,11 +117,6 @@ Page({
     }
 
   },
-  bindPickerChange: function (e) {
-    this.setData({
-      typeIndex: +e.detail.value
-    })
-  },
   cancel() {
     wx.navigateBack({
       delta: 1
@@ -135,11 +125,6 @@ Page({
   inputTitleBlur(e) {
     this.setData({
       title: e.detail.value
-    })
-  },
-  inputPriceBlur(e) {
-    this.setData({
-      price: e.detail.value
     })
   },
   inputPhoneBlur(e) {
@@ -152,9 +137,9 @@ Page({
       contact: e.detail.value
     })
   },
-  inputDescriptionBlur(e) {
+  inputReasonBlur(e) {
     this.setData({
-      description: e.detail.value
+      reason: e.detail.value
     })
   },
   upload() {
@@ -238,21 +223,4 @@ Page({
       current: index
     })
   },
-  choosePosition() {
-    wx.chooseLocation({
-      success: (res) => {
-        console.log(res);
-        this.setData({
-          position: res.name,
-          address: res.address,
-          latitude: res.latitude,
-          longitude: res.longitude,
-          markers: [{
-            latitude: res.latitude,
-            longitude: res.longitude,
-          }]
-        })
-      }
-    })
-  }
 })

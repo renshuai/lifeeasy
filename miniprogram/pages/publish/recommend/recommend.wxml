@@ -1,20 +1,12 @@
 <view class="page-container">
   <view>
     <view class='form-block'>
-      <text>发布类型</text>
-      <picker bindchange="bindPickerChange" value="{{typeIndex}}" range="{{typeArray}}">
-        <view class="picker">
-          {{typeArray[typeIndex]}}
-        </view>
-      </picker>
-    </view>
-    <view class='form-block'>
-      <text>标题</text>
-      <input type='text' value='{{title}}' placeholder='请概况标题(必填)' bindblur='inputTitleBlur' adjust-position/>
+      <text>推荐内容</text>
+      <input type='text' value='{{title}}' placeholder='请输入推荐内容(必填)' bindblur='inputTitleBlur' adjust-position/>
     </view>
     <view class='form-block-vertical'>
-      <text>详细描述</text>
-      <textarea bindblur="inputDescriptionBlur" value='{{description}}'  auto-height placeholder="描述事情(非必填)" adjust-position/>
+      <text>推荐理由</text>
+      <textarea bindblur="inputReasonBlur" value='{{reason}}'  auto-height placeholder="描述推荐理由(必填)" adjust-position/>
     </view>
     <view class='form-block'>
       <text>联系电话</text>

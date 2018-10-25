@@ -48,27 +48,15 @@
   flex: 1;
 }
 
-.edit-btn,
-.delete-btn,
-.contact-btn {
-  margin-right: 10rpx;
-}
-
-.edit-btn,
-.contact-btn {
+.publish {
+  margin-right: 40rpx;
   background-color: #FD0000;
   color: #fff;
 }
 
-.delete-btn {
-  background-color: #999999;
-  color: #fff;
-}
-
-.back-btn {
+.cancel {
   border: 1px solid #FD0000;
   color: #FD0000;
-  background-color: #fff;
 }
 
 .photos-wrap {
@@ -130,10 +118,5 @@
 
 .choose-btn {
   flex: 1;
-  color: #0099FF;
-}
-
-.navigation {
-  margin-left: 10rpx;
   color: #0099FF;
 }
